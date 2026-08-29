@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Управление блоками лендинга преподавателя математики">
+  <title>Управление лендингом</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-locked" data-styleseed-recipe="enterprise-workbench">
+  <section class="auth-screen" id="auth-screen" aria-labelledby="auth-title">
+    <div class="auth-visual" aria-hidden="true"><span>√</span><div>y = ax² + bx + c</div></div>
+    <form class="auth-card" id="login-form">
+      <p class="eyebrow">Защищённый раздел</p>
+      <h1 id="auth-title">Вход в Admin</h1>
+      <p>Введите пароль для управления блоками лендинга.</p>
+      <label>Пароль<input name="password" type="password" inputmode="numeric" autocomplete="current-password" required autofocus placeholder="Введите пароль"></label>
+      <p class="auth-error" id="login-error" hidden>Неверный пароль. Попробуйте ещё раз.</p>
+      <button class="control control--primary" type="submit">Войти <span>→</span></button>
+      <a href="index.html">← Вернуться на сайт</a>
+    </form>
+  </section>
+  <header class="admin-header">
+    <a class="admin-brand" href="index.html"><i>√</i><span><b class="admin-site-name">Понимать математику</b><small>Панель управления</small></span></a>
+    <div class="header-actions"><a class="control control--ghost" href="index.html">← Открыть сайт</a><button class="control control--ghost" id="logout-button">Выйти</button><button class="control control--primary" id="add-block">Добавить блок <span>+</span></button></div>
+  </header>
+
+  <main class="admin-shell">
+    <aside class="admin-sidebar" aria-label="Разделы админ-панели">
+      <a class="sidebar-link active" href="#blocks"><span>01</span> Блоки лендинга</a>
+      <a class="sidebar-link" href="#site-settings"><span>02</span> Название и стикер</a>
+      <a class="sidebar-link" href="#access"><span>03</span> Доступ</a>
+      <a class="sidebar-link" href="#help"><span>04</span> Как это работает</a>
+      <div class="sidebar-note"><strong>Локальная CMS</strong><p>Изменения сохраняются в этом браузере и сразу отображаются на лендинге.</p></div>
+    </aside>
+
+    <div class="admin-content">
+      <section class="admin-hero" id="blocks">
+        <div><p class="eyebrow">Управление содержимым</p><h1>Блоки лендинга</h1><p>Редактируйте, удаляйте, добавляйте и меняйте порядок секций. Сетка автоматически перераспределяется после каждого изменения.</p></div>
+        <div class="hero-metric"><span id="block-count">0</span><small>активных блоков</small></div>
+      </section>
+
+      <section class="site-settings-panel" id="site-settings">
+        <div><p class="eyebrow">Общие настройки</p><h2>Название и стикер тарифа</h2><p>Название меняется во всех логотипах. Стикер можно убрать или перенести на любой тариф.</p></div>
+        <form id="site-settings-form">
+          <label>Название сайта<input name="siteName" required maxlength="60"></label>
+          <label>Стикер на тарифе<select name="priceBadgePlan"><option value="">Без стикера</option><option value="single">Разовое занятие</option><option value="four">4 занятия</option><option value="eight">8 занятий</option></select></label>
+          <label>Текст стикера<input name="priceBadgeText" maxlength="40" placeholder="Оптимальный вариант"></label>
+          <button class="control control--primary" type="submit">Сохранить настройки</button>
+        </form>
+      </section>
+
+      <section class="toolbar" aria-label="Панель действий">
+        <div class="search-wrap"><label for="block-search">Поиск по блокам</label><input id="block-search" type="search" placeholder="Например, стоимость"></div>
+        <div class="toolbar-actions"><button class="control control--ghost" id="reset-blocks">Вернуть исходные</button><button class="control control--primary" id="add-block-secondary">Новый блок <span>+</span></button></div>
+      </section>
+
+      <div class="block-grid" id="block-list" aria-live="polite"></div>
+      <div class="empty-state" id="empty-state" hidden><span>Σ</span><h2>Блоков пока нет</h2><p>Добавьте первый блок — он сразу появится на лендинге.</p><button class="control control--primary" id="empty-add">Добавить блок</button></div>
+
+      <section class="access-panel" id="access"><div><p class="eyebrow">Настройки доступа</p><h2>Изменить пароль Admin</h2><p>После смены используйте новый пароль при следующем входе в панель.</p></div><form id="password-form"><label>Текущий пароль<input name="currentPassword" type="password" autocomplete="current-password" required></label><label>Новый пароль<input name="newPassword" type="password" autocomplete="new-password" minlength="4" required></label><label>Повторите пароль<input name="confirmPassword" type="password" autocomplete="new-password" minlength="4" required></label><p class="password-message" id="password-message" hidden></p><button class="control control--primary" type="submit">Сохранить новый пароль</button></form></section>
+
+      <section class="help-panel" id="help"><p class="eyebrow">Подсказка</p><h2>Контакты работают автоматически</h2><div class="help-grid"><div><strong>Телефон</strong><p>Введите номер в любом привычном формате. На лендинге он станет ссылкой для звонка.</p></div><div><strong>Ссылка</strong><p>Добавьте адрес страницы и подпись. После сохранения ссылка будет кликабельной.</p></div><div><strong>Порядок</strong><p>Кнопки со стрелками перемещают блок. После удаления остальные равномерно занимают сетку.</p></div></div></section>
+    </div>
+  </main>
+
+  <div class="editor-backdrop" id="block-editor" role="dialog" aria-modal="true" aria-labelledby="editor-title">
+    <form class="editor-panel" id="block-form">
+      <div class="editor-head"><div><p class="eyebrow">Редактор блока</p><h2 id="editor-title">Новый блок</h2></div><button type="button" class="icon-control editor-close" aria-label="Закрыть">×</button></div>
+      <input type="hidden" name="id">
+      <div class="editor-fields">
+        <label>Метка блока<input name="label" placeholder="10 / Новый блок"></label>
+        <label>Заголовок<input name="title" required placeholder="Заголовок блока"></label>
+        <label class="field-wide">Описание<textarea name="description" required placeholder="Коротко опишите содержание блока"></textarea></label>
+        <label>Телефон<input name="phone" inputmode="tel" placeholder="+375 (29) 000-00-00"></label>
+        <label>Фон<select name="background"></select></label>
+        <label>Текст ссылки<input name="linkText" placeholder="Подробнее"></label>
+        <label>Адрес ссылки<input name="linkUrl" type="url" placeholder="https://example.com"></label>
+      </div>
+      <p class="editor-error" id="editor-error" hidden></p>
+      <div class="editor-actions"><button type="button" class="control control--ghost editor-close">Отмена</button><button type="submit" class="control control--primary">Сохранить изменения</button></div>
+    </form>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/auth.js"></script>
+  <script src="js/content-store.js"></script>
+  <script src="js/admin.js" defer></script>
+</body>
+</html>
