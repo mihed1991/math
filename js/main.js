@@ -99,7 +99,13 @@ function applyManagedContent() {
 function applySiteSettings() {
   const settings = contentStore?.loadSettings?.() || contentStore?.defaultSettings;
   if (!settings) return;
+  const finalBlock = contentStore.load().find(block => block.id === 'final');
+  const sitePhone = finalBlock?.phone || '+375 (00) 000-00-00';
   document.querySelectorAll('.site-name').forEach(element => { element.textContent = settings.siteName; });
+  document.querySelectorAll('[data-site-phone]').forEach(element => {
+    element.textContent = sitePhone;
+    element.href = phoneHref(sitePhone);
+  });
   document.title = `${settings.siteName} — индивидуальные занятия`;
   document.querySelectorAll('.price-card .badge').forEach(badge => badge.remove());
   const badgeCard = settings.priceBadgePlan && document.querySelector(`.price-card[data-plan-id="${CSS.escape(settings.priceBadgePlan)}"]`);

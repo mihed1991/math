@@ -48,6 +48,13 @@
 .selected-plan-note{margin:16px 0 0;padding:10px 12px;border-left:2px solid var(--gold);background:rgba(215,160,91,.08);color:var(--cream);font-size:13px}
 .reviews-row{scrollbar-width:none;-ms-overflow-style:none}
 .reviews-row::-webkit-scrollbar{display:none;width:0;height:0}
+
+/* Кликабельный телефон в шапке и мобильном меню. */
+.header-phone{position:relative;padding:8px 0;color:var(--cream);font-size:14px;font-weight:700;white-space:nowrap;transition:color .22s ease}
+.header-phone::before{content:"tel";margin-right:9px;color:var(--gold);font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+.header-phone:hover{color:var(--gold)}
+.mobile-phone{margin-top:8px;padding:14px 0 2px;border-top:1px solid var(--line);color:var(--gold)!important;font-weight:700}
+@media(max-width:850px){.header>.header-phone{display:none}}
 .managed-summary,.custom-block-copy{max-width:65ch;color:var(--muted);font-size:18px}
 .admin-dynamic-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .custom-content-block{min-height:520px;display:flex;align-items:center}
