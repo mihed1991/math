@@ -187,7 +187,7 @@ passwordForm.addEventListener('submit',async event => {
   const result = await adminAuth.change(current,next);
   passwordMessage.textContent = result.message;
   passwordMessage.classList.toggle('success',result.ok);
-  if (result.ok) { passwordForm.reset(); showToast('Пароль Admin изменён'); }
+  if (result.ok) { passwordForm.reset(); showToast('Пароль панели управления изменён'); }
 });
 siteSettingsForm.addEventListener('submit',event => {
   event.preventDefault();

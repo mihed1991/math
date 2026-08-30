@@ -157,6 +157,7 @@ const trailPoints=Array.from({length:4},(_,index)=>{
 });
 document.body.append(trail);
 let mouseX=-100,mouseY=-100,cursorX=-100,cursorY=-100,cursorReady=false;
+let trailIdleTimer;
 function animateCursor(){
   cursorX+=(mouseX-cursorX)*.28;
   cursorY+=(mouseY-cursorY)*.28;
@@ -166,11 +167,11 @@ function animateCursor(){
     const ease=Math.max(.08,.18-index*.025);
     point.x+=(targetX-point.x)*ease;
     point.y+=(targetY-point.y)*ease;
-    point.token.style.transform=`translate3d(${point.x-102}px,${point.y+18}px,0) scale(${1-index*.055})`;
+    point.token.style.transform=`translate3d(${point.x+28}px,${point.y-7}px,0) scale(${1-index*.055})`;
     targetX=point.x;
     targetY=point.y;
   });
   requestAnimationFrame(animateCursor);
 }
-if(finePointer.matches){animateCursor();addEventListener('pointermove',event=>{mouseX=event.clientX;mouseY=event.clientY;if(!cursorReady){cursorReady=true;cursor.classList.add('visible');if(!reducedMotion.matches)trail.classList.add('visible');document.documentElement.classList.add('custom-cursor')}},{passive:true});addEventListener('pointerleave',()=>{cursor.classList.remove('visible');trail.classList.remove('visible')});addEventListener('pointerenter',()=>{if(cursorReady){cursor.classList.add('visible');if(!reducedMotion.matches)trail.classList.add('visible')}});document.addEventListener('pointerover',event=>{if(event.target.closest('a'))cursor.classList.add('hover-link');if(event.target.closest('button,.button')){cursor.classList.add('hover-action');symbol.textContent='→'}if(event.target.closest('.card'))cursor.classList.add('hover-card')});document.addEventListener('pointerout',event=>{const next=event.relatedTarget;if(!next?.closest?.('a'))cursor.classList.remove('hover-link');if(!next?.closest?.('button,.button')){cursor.classList.remove('hover-action');symbol.textContent='√'}if(!next?.closest?.('.card'))cursor.classList.remove('hover-card')})}
+if(finePointer.matches){animateCursor();addEventListener('pointermove',event=>{mouseX=event.clientX;mouseY=event.clientY;trail.classList.remove('is-idle');clearTimeout(trailIdleTimer);trailIdleTimer=setTimeout(()=>trail.classList.add('is-idle'),180);if(!cursorReady){cursorReady=true;cursor.classList.add('visible');if(!reducedMotion.matches)trail.classList.add('visible');document.documentElement.classList.add('custom-cursor')}},{passive:true});addEventListener('pointerleave',()=>{cursor.classList.remove('visible');trail.classList.remove('visible');trail.classList.remove('is-idle');clearTimeout(trailIdleTimer)});addEventListener('pointerenter',()=>{if(cursorReady){cursor.classList.add('visible');if(!reducedMotion.matches)trail.classList.add('visible')}});document.addEventListener('pointerover',event=>{if(event.target.closest('a'))cursor.classList.add('hover-link');if(event.target.closest('button,.button')){cursor.classList.add('hover-action');symbol.textContent='→'}if(event.target.closest('.card'))cursor.classList.add('hover-card')});document.addEventListener('pointerout',event=>{const next=event.relatedTarget;if(!next?.closest?.('a'))cursor.classList.remove('hover-link');if(!next?.closest?.('button,.button')){cursor.classList.remove('hover-action');symbol.textContent='√'}if(!next?.closest?.('.card'))cursor.classList.remove('hover-card')})}
 addEventListener('storage',event=>{if(event.key===contentStore?.STORAGE_KEY||event.key===contentStore?.SETTINGS_KEY)location.reload()});

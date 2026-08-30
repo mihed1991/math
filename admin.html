@@ -15,7 +15,7 @@
     <div class="auth-visual" aria-hidden="true"><span>√</span><div>y = ax² + bx + c</div></div>
     <form class="auth-card" id="login-form">
       <p class="eyebrow">Защищённый раздел</p>
-      <h1 id="auth-title">Вход в Admin</h1>
+      <h1 id="auth-title">Вход в панель управления</h1>
       <p>Введите пароль для управления блоками лендинга.</p>
       <label>Пароль<input name="password" type="password" inputmode="numeric" autocomplete="current-password" required autofocus placeholder="Введите пароль"></label>
       <p class="auth-error" id="login-error" hidden>Неверный пароль. Попробуйте ещё раз.</p>
@@ -62,7 +62,7 @@
       <div class="block-grid" id="block-list" aria-live="polite"></div>
       <div class="empty-state" id="empty-state" hidden><span>Σ</span><h2>Блоков пока нет</h2><p>Добавьте первый блок — он сразу появится на лендинге.</p><button class="control control--primary" id="empty-add">Добавить блок</button></div>
 
-      <section class="access-panel" id="access"><div><p class="eyebrow">Настройки доступа</p><h2>Изменить пароль Admin</h2><p>После смены используйте новый пароль при следующем входе в панель.</p></div><form id="password-form"><label>Текущий пароль<input name="currentPassword" type="password" autocomplete="current-password" required></label><label>Новый пароль<input name="newPassword" type="password" autocomplete="new-password" minlength="4" required></label><label>Повторите пароль<input name="confirmPassword" type="password" autocomplete="new-password" minlength="4" required></label><p class="password-message" id="password-message" hidden></p><button class="control control--primary" type="submit">Сохранить новый пароль</button></form></section>
+      <section class="access-panel" id="access"><div><p class="eyebrow">Настройки доступа</p><h2>Изменить пароль панели управления</h2><p>После смены используйте новый пароль при следующем входе в панель.</p></div><form id="password-form"><label>Текущий пароль<input name="currentPassword" type="password" autocomplete="current-password" required></label><label>Новый пароль<input name="newPassword" type="password" autocomplete="new-password" minlength="4" required></label><label>Повторите пароль<input name="confirmPassword" type="password" autocomplete="new-password" minlength="4" required></label><p class="password-message" id="password-message" hidden></p><button class="control control--primary" type="submit">Сохранить новый пароль</button></form></section>
 
       <section class="help-panel" id="help"><p class="eyebrow">Подсказка</p><h2>Контакты работают автоматически</h2><div class="help-grid"><div><strong>Телефон</strong><p>Введите номер в любом привычном формате. На лендинге он станет ссылкой для звонка.</p></div><div><strong>Ссылка</strong><p>Добавьте адрес страницы и подпись. После сохранения ссылка будет кликабельной.</p></div><div><strong>Порядок</strong><p>Кнопки со стрелками перемещают блок. После удаления остальные равномерно занимают сетку.</p></div></div></section>
     </div>

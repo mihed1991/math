@@ -64,11 +64,13 @@ body{min-height:100%;overflow-x:clip}
 .header-phone::before{content:none}
 .discriminant-trail{display:none;position:fixed;z-index:9998;inset:0;pointer-events:none;opacity:0;transition:opacity .24s ease;contain:strict}
 .discriminant-trail.visible{opacity:1}
-.discriminant-trail-token{position:absolute;left:0;top:0;color:#d7a05b;font:italic 15px/1 var(--serif);white-space:nowrap;text-shadow:0 1px 8px rgba(0,0,0,.92),0 0 14px rgba(215,160,91,.24);transform-origin:right center;will-change:transform}
-.discriminant-trail-token:nth-child(1){opacity:.42}
-.discriminant-trail-token:nth-child(2){opacity:.28;filter:blur(.15px)}
-.discriminant-trail-token:nth-child(3){opacity:.18;filter:blur(.35px)}
-.discriminant-trail-token:nth-child(4){opacity:.1;filter:blur(.55px)}
+.discriminant-trail-token{position:absolute;left:0;top:0;color:#e2aa63;font:italic 16px/1 var(--serif);white-space:nowrap;text-shadow:0 1px 8px rgba(0,0,0,.95),0 0 16px rgba(215,160,91,.35);transform-origin:left center;transition:opacity .18s ease,filter .18s ease;will-change:transform}
+.discriminant-trail-token:nth-child(1){opacity:.68}
+.discriminant-trail-token:nth-child(2){opacity:.38;filter:blur(.12px)}
+.discriminant-trail-token:nth-child(3){opacity:.22;filter:blur(.28px)}
+.discriminant-trail-token:nth-child(4){opacity:.12;filter:blur(.48px)}
+.discriminant-trail.is-idle .discriminant-trail-token:first-child{opacity:1;filter:none;color:#f0bd78;text-shadow:0 1px 7px rgba(0,0,0,.96),0 0 18px rgba(215,160,91,.48)}
+.discriminant-trail.is-idle .discriminant-trail-token:not(:first-child){opacity:0}
 @media(pointer:fine){.discriminant-trail{display:block}}
 @media(prefers-reduced-motion:reduce){.discriminant-trail{display:none!important}}
 .modal{background:linear-gradient(rgba(36,28,22,.93),rgba(28,21,16,.96)),url("../ChatGPT Image 29 авг. 2026 г., 14_36_10 (1).png") center/cover no-repeat}
