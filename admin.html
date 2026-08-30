@@ -44,9 +44,10 @@
       </section>
 
       <section class="site-settings-panel" id="site-settings">
-        <div><p class="eyebrow">Общие настройки</p><h2>Название и стикер тарифа</h2><p>Название меняется во всех логотипах. Стикер можно убрать или перенести на любой тариф.</p></div>
+        <div><p class="eyebrow">Общие настройки</p><h2>Название, телефон и стикер</h2><p>Название меняется во всех логотипах, телефон — в шапке сайта. Стикер можно убрать или перенести на любой тариф.</p></div>
         <form id="site-settings-form">
           <label>Название сайта<input name="siteName" required maxlength="60"></label>
+          <label class="settings-wide">Телефон в шапке<input name="sitePhone" inputmode="tel" required maxlength="30" placeholder="+375 (29) 000-00-00"></label>
           <label>Стикер на тарифе<select name="priceBadgePlan"><option value="">Без стикера</option><option value="single">Разовое занятие</option><option value="four">4 занятия</option><option value="eight">8 занятий</option></select></label>
           <label>Текст стикера<input name="priceBadgeText" maxlength="40" placeholder="Оптимальный вариант"></label>
           <button class="control control--primary" type="submit">Сохранить настройки</button>

@@ -55,6 +55,26 @@
 .header-phone:hover{color:var(--gold)}
 .mobile-phone{margin-top:8px;padding:14px 0 2px;border-top:1px solid var(--line);color:var(--gold)!important;font-weight:700}
 @media(max-width:850px){.header>.header-phone{display:none}}
+
+/* Устойчивая шапка, надёжные ссылки и математический шлейф курсора. */
+html{background:var(--bg);overflow-x:clip}
+body{min-height:100%;overflow-x:clip}
+.header.scrolled{background:#1a1511;border-bottom:0;box-shadow:0 1px 0 rgba(215,160,91,.18);backdrop-filter:none}
+.nav a[data-admin-link]{position:relative;z-index:2;margin:-10px -6px;padding:10px 6px;color:var(--gold)}
+.header-phone::before{content:none}
+.discriminant-trail{display:none;position:fixed;z-index:9998;inset:0;pointer-events:none;opacity:0;transition:opacity .24s ease;contain:strict}
+.discriminant-trail.visible{opacity:1}
+.discriminant-trail-token{position:absolute;left:0;top:0;color:#d7a05b;font:italic 15px/1 var(--serif);white-space:nowrap;text-shadow:0 1px 8px rgba(0,0,0,.92),0 0 14px rgba(215,160,91,.24);transform-origin:right center;will-change:transform}
+.discriminant-trail-token:nth-child(1){opacity:.42}
+.discriminant-trail-token:nth-child(2){opacity:.28;filter:blur(.15px)}
+.discriminant-trail-token:nth-child(3){opacity:.18;filter:blur(.35px)}
+.discriminant-trail-token:nth-child(4){opacity:.1;filter:blur(.55px)}
+@media(pointer:fine){.discriminant-trail{display:block}}
+@media(prefers-reduced-motion:reduce){.discriminant-trail{display:none!important}}
+.modal{background:linear-gradient(rgba(36,28,22,.93),rgba(28,21,16,.96)),url("../ChatGPT Image 29 авг. 2026 г., 14_36_10 (1).png") center/cover no-repeat}
+.selected-plan-field{display:grid;gap:7px;margin:18px 0 6px;color:var(--muted);font-size:12px;font-weight:600}
+.selected-plan-field select{width:100%;min-height:46px;padding:11px 13px;border:1px solid rgba(215,160,91,.5);border-radius:0;outline:0;background:rgba(24,18,14,.82);color:var(--cream)}
+.selected-plan-field select:focus{border-color:var(--gold)}
 .managed-summary,.custom-block-copy{max-width:65ch;color:var(--muted);font-size:18px}
 .admin-dynamic-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .custom-content-block{min-height:520px;display:flex;align-items:center}

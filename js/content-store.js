@@ -3,6 +3,7 @@
   const SETTINGS_KEY = 'mathTutorLandingSettingsV1';
   const defaultSettings = {
     siteName: 'Понимать математику',
+    sitePhone: '+375 (00) 000-00-00',
     priceBadgePlan: 'four',
     priceBadgeText: 'Оптимальный вариант'
   };

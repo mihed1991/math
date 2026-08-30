@@ -35,7 +35,7 @@
 .site-settings-panel>div>p:last-child{color:var(--text-muted)}
 .site-settings-panel form{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
 .site-settings-panel label{display:grid;gap:var(--space-2);color:var(--text-muted);font-size:12px;font-weight:600}
-.site-settings-panel label:first-child,.site-settings-panel .control{grid-column:1/-1}
+.site-settings-panel label:first-child,.site-settings-panel .settings-wide,.site-settings-panel .control{grid-column:1/-1}
 .site-settings-panel input,.site-settings-panel select{width:100%;min-height:48px;padding:11px 13px;border:1px solid var(--border);border-radius:2px;outline:0;background:var(--canvas);color:var(--text)}
 .site-settings-panel input:focus,.site-settings-panel select:focus{border-color:var(--focus)}
 @media(max-width:800px){.site-settings-panel{grid-template-columns:1fr;padding:var(--space-5)}.site-settings-panel form{grid-template-columns:1fr}.site-settings-panel label,.site-settings-panel .control{grid-column:auto}}

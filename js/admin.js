@@ -26,6 +26,7 @@ function unlockAdmin() {
 
 function renderSiteSettings() {
   siteSettingsForm.elements.siteName.value = siteSettings.siteName;
+  siteSettingsForm.elements.sitePhone.value = siteSettings.sitePhone;
   siteSettingsForm.elements.priceBadgePlan.value = siteSettings.priceBadgePlan;
   siteSettingsForm.elements.priceBadgeText.value = siteSettings.priceBadgeText;
   document.querySelectorAll('.admin-site-name').forEach(element => { element.textContent = siteSettings.siteName; });
@@ -194,6 +195,7 @@ siteSettingsForm.addEventListener('submit',event => {
   const data = Object.fromEntries(new FormData(siteSettingsForm));
   siteSettings = {
     siteName: data.siteName.trim(),
+    sitePhone: data.sitePhone.trim(),
     priceBadgePlan: data.priceBadgePlan,
     priceBadgeText: data.priceBadgeText.trim()
   };
