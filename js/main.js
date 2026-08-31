@@ -133,6 +133,17 @@ addEventListener('keydown',event=>{if(event.key==='Escape')closeModal()});
 form.addEventListener('submit',event=>{event.preventDefault();if(!form.checkValidity()){form.reportValidity();return}const submit=form.querySelector('[type="submit"]');submit.textContent='Отправляем…';submit.disabled=true;setTimeout(()=>{form.style.display='none';success.style.display='block'},650)});
 document.addEventListener('click',event=>{const question=event.target.closest('.faq-question');if(!question)return;const item=question.closest('.faq-item');document.querySelectorAll('.faq-item.open').forEach(openItem=>{if(openItem!==item)openItem.classList.remove('open')});item.classList.toggle('open')});
 
+const reviewsRow=document.querySelector('.reviews-row');
+const reviewPrev=document.querySelector('[data-review-prev]');
+const reviewNext=document.querySelector('[data-review-next]');
+function updateReviewNavigation(){if(!reviewsRow||!reviewPrev||!reviewNext)return;const card=reviewsRow.querySelector('.review');const step=(card?.getBoundingClientRect().width||reviewsRow.clientWidth)+18;const edgeTolerance=Math.min(80,step*.25);const maxScroll=reviewsRow.scrollWidth-reviewsRow.clientWidth;reviewPrev.disabled=reviewsRow.scrollLeft<=edgeTolerance;reviewNext.disabled=reviewsRow.scrollLeft>=maxScroll-edgeTolerance}
+function scrollReviews(direction){if(!reviewsRow)return;const card=reviewsRow.querySelector('.review');const step=(card?.getBoundingClientRect().width||reviewsRow.clientWidth)+18;reviewsRow.scrollBy({left:direction*step,behavior:'smooth'})}
+reviewPrev?.addEventListener('click',()=>scrollReviews(-1));
+reviewNext?.addEventListener('click',()=>scrollReviews(1));
+reviewsRow?.addEventListener('scroll',updateReviewNavigation,{passive:true});
+addEventListener('resize',updateReviewNavigation,{passive:true});
+requestAnimationFrame(updateReviewNavigation);
+
 const priceCards=[...document.querySelectorAll('.price-card')];
 priceCards.forEach(card=>{const option=document.createElement('option');option.value=card.dataset.planId;option.textContent=`${card.querySelector('h3')?.textContent||''} — ${card.querySelector('strong')?.textContent||''}`;selectedPlanSelect?.append(option)});
 function selectPriceCard(card){priceCards.forEach(item=>{const selected=item===card;item.classList.toggle('selected',selected);item.setAttribute('aria-pressed',String(selected));const button=item.querySelector('.button');if(button){if(!button.dataset.defaultText)button.dataset.defaultText=button.textContent.trim();button.textContent=selected?'Выбрано ✓':button.dataset.defaultText}});selectedPlan=card.dataset.planId;if(selectedPlanSelect)selectedPlanSelect.value=selectedPlan}
