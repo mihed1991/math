@@ -134,12 +134,11 @@ form.addEventListener('submit',event=>{event.preventDefault();if(!form.checkVali
 document.addEventListener('click',event=>{const question=event.target.closest('.faq-question');if(!question)return;const item=question.closest('.faq-item');document.querySelectorAll('.faq-item.open').forEach(openItem=>{if(openItem!==item)openItem.classList.remove('open')});item.classList.toggle('open')});
 
 const reviewsRow=document.querySelector('.reviews-row');
-const reviewPrev=document.querySelector('[data-review-prev]');
-const reviewNext=document.querySelector('[data-review-next]');
-function updateReviewNavigation(){if(!reviewsRow||!reviewPrev||!reviewNext)return;const card=reviewsRow.querySelector('.review');const step=(card?.getBoundingClientRect().width||reviewsRow.clientWidth)+18;const edgeTolerance=Math.min(80,step*.25);const maxScroll=reviewsRow.scrollWidth-reviewsRow.clientWidth;reviewPrev.disabled=reviewsRow.scrollLeft<=edgeTolerance;reviewNext.disabled=reviewsRow.scrollLeft>=maxScroll-edgeTolerance}
-function scrollReviews(direction){if(!reviewsRow)return;const card=reviewsRow.querySelector('.review');const step=(card?.getBoundingClientRect().width||reviewsRow.clientWidth)+18;reviewsRow.scrollBy({left:direction*step,behavior:'smooth'})}
-reviewPrev?.addEventListener('click',()=>scrollReviews(-1));
-reviewNext?.addEventListener('click',()=>scrollReviews(1));
+const reviewDots=[...document.querySelectorAll('[data-review-index]')];
+function reviewStep(){const card=reviewsRow?.querySelector('.review');return(card?.getBoundingClientRect().width||reviewsRow?.clientWidth||0)+18}
+function updateReviewNavigation(){if(!reviewsRow||!reviewDots.length)return;const index=Math.max(0,Math.min(reviewDots.length-1,Math.round(reviewsRow.scrollLeft/reviewStep())));reviewDots.forEach((dot,dotIndex)=>dot.setAttribute('aria-current',String(dotIndex===index)))}
+function showReview(index){if(!reviewsRow)return;const currentIndex=Math.max(0,Math.min(reviewDots.length-1,Math.round(reviewsRow.scrollLeft/reviewStep())));reviewsRow.scrollBy({left:(index-currentIndex)*reviewStep(),behavior:'smooth'})}
+reviewDots.forEach(dot=>dot.addEventListener('click',()=>showReview(Number(dot.dataset.reviewIndex))));
 reviewsRow?.addEventListener('scroll',updateReviewNavigation,{passive:true});
 addEventListener('resize',updateReviewNavigation,{passive:true});
 requestAnimationFrame(updateReviewNavigation);
