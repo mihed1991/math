@@ -160,7 +160,7 @@ trail.setAttribute('aria-hidden','true');
 const trailPoints=Array.from({length:4},(_,index)=>{
   const token=document.createElement('span');
   token.className='discriminant-trail-token';
-  token.textContent='D = b² − 4ac';
+  token.textContent='a² + b²';
   token.style.setProperty('--trail-index',String(index));
   trail.append(token);
   return {x:-120,y:-120,token};
@@ -177,7 +177,7 @@ function animateCursor(){
     const ease=Math.max(.08,.18-index*.025);
     point.x+=(targetX-point.x)*ease;
     point.y+=(targetY-point.y)*ease;
-    point.token.style.transform=`translate3d(${point.x+28}px,${point.y-7}px,0) scale(${1-index*.055})`;
+    point.token.style.transform=`translate3d(${point.x+28}px,${point.y+5}px,0) scale(${1-index*.055})`;
     targetX=point.x;
     targetY=point.y;
   });
