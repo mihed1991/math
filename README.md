@@ -1,100 +1,61 @@
-# vinext-starter
+# Math Tutor Landing Page
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Responsive website for a private mathematics tutor, built with HTML, CSS, and JavaScript. The project was created with AI-assisted development using OpenAI Codex.
 
-## Prerequisites
+![Math Tutor Landing Page preview](public/og.png)
 
-- Node.js `>=22.13.0`
+## Live Demo
 
-## Quick Start
+[View the website on GitHub Pages](https://mihed1991.github.io/math/)
+
+## Features
+
+- Responsive landing page for desktop and mobile devices
+- Custom mathematics-themed cursor with an animated formula trail
+- Online and offline lesson formats
+- Interactive pricing plan selection
+- Booking form with tariff selection and confirmation state
+- Horizontally scrollable student reviews with mobile navigation dots
+- Expandable FAQ section
+- Clickable phone numbers and links
+- Client-side content management panel for editing, adding, removing, and reordering blocks
+- Editable site name, header phone number, pricing badge, and admin password
+
+## Technologies
+
+- Semantic HTML5
+- CSS3 with responsive layouts and animations
+- Vanilla JavaScript
+- Browser `localStorage` for client-side content settings
+- GitHub Actions and GitHub Pages for deployment
+- OpenAI Codex for AI-assisted development
+
+## Project Structure
+
+```text
+.
+├── index.html          # Landing page
+├── admin.html          # Content management panel
+├── css/                # Landing and admin styles
+├── js/                 # Interactions, content storage, and admin logic
+├── public/             # Optimized images, video, and social preview assets
+└── .github/workflows/  # GitHub Pages deployment
+```
+
+## Run Locally
+
+No build step is required for the landing page. Start any static file server in the project directory, for example:
 
 ```bash
-npm install
-npm run dev
-npm run build
+python3 -m http.server 8099
 ```
 
-This starter does not use `wrangler.jsonc`.
+Then open [http://localhost:8099](http://localhost:8099).
 
-## Included Shape
+## Admin Panel
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+The content management panel is available at `/admin.html`. Its data and settings are stored locally in the current browser, so this panel is intended for client-side content management rather than server-side authentication or shared database storage.
 
-## Workspace Auth Headers
+## Deployment
 
-Signed-in visitors receive both `oai-authenticated-user-id` and `oai-authenticated-user-email`. Private Sites require every visitor to sign in; public Sites may also have anonymous visitors, for whom neither header is present.
-
-The user ID is stable for the same user on the same Site and different across Sites. Email and name are intended for display or contact purposes.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const userId = requestHeaders.get("oai-authenticated-user-id");
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
-```
-
-## Optional Dispatch-Owned ChatGPT Sign-In
-
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
-
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
-
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
-
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
-
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+Pushes to the `main` branch are deployed automatically to GitHub Pages through the included GitHub Actions workflow.
